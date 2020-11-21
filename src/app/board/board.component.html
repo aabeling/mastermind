@@ -4,61 +4,24 @@
     <th colspan="4">Kombination</th>
     <th>Bewertung</th>
   </tr>
-  <tr>
-    <td>1</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>2/1</td>
+  <tr *ngFor="let guess of board.guesses; let try = index">
+    <td>{{try+1}}</td>
+    <td>{{guess.combination.c1}}</td>
+    <td>{{guess.combination.c2}}</td>
+    <td>{{guess.combination.c3}}</td>
+    <td>{{guess.combination.c4}}</td>
+    <td>{{guess.correct}}/{{guess.correctColors}}</td>
   </tr>
-  <tr>
-    <td>2</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>2/1</td>
+  <tr *ngIf="board.guesses.length < board.maxTries">
+    <td>&nbsp;</td>
+    <td>c1</td>
+    <td>c2</td>
+    <td>c3</td>
+    <td>c4</td>
+    <td>&nbsp;</td>
   </tr>
-  <tr>
-    <td>3</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>2/1</td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>2/1</td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>2/1</td>
-  </tr>
-  <tr>
-    <td>6</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>2/1</td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td>A</td>
-    <td>B</td>
-    <td>C</td>
-    <td>D</td>
-    <td>2/1</td>
+  <tr *ngIf="board.guesses.length >= board.maxTries">
+    <td colspan="6">Spiel vorbei</td>
   </tr>
 
 </table>
