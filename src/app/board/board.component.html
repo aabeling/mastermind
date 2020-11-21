@@ -4,6 +4,7 @@
     <th colspan="4">Kombination</th>
     <th>Bewertung</th>
   </tr>
+  <!-- iterate over all guesses -->
   <tr *ngFor="let guess of board.guesses; let try = index">
     <td>{{try+1}}</td>
     <td>{{guess.combination.c1}}</td>
@@ -12,16 +13,56 @@
     <td>{{guess.combination.c4}}</td>
     <td>{{guess.correct}}/{{guess.correctColors}}</td>
   </tr>
+  <!-- input for new guess -->
   <tr *ngIf="board.guesses.length < board.maxTries">
     <td>&nbsp;</td>
-    <td>c1</td>
-    <td>c2</td>
-    <td>c3</td>
-    <td>c4</td>
-    <td>&nbsp;</td>
+    <td><select [(ngModel)]="combination.c1">
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+      <option>D</option>
+      <option>E</option>
+      <option>F</option>
+    </select></td>
+    <td><select [(ngModel)]="combination.c2">
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+      <option>D</option>
+      <option>E</option>
+      <option>F</option>
+    </select></td>
+    <td><select [(ngModel)]="combination.c3">
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+      <option>D</option>
+      <option>E</option>
+      <option>F</option>
+    </select></td>
+    <td><select [(ngModel)]="combination.c4">
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+      <option>D</option>
+      <option>E</option>
+      <option>F</option>
+    </select></td>
+    <td><input type="submit" value="Versuchen"></td>
   </tr>
+  <!-- nur zum Testen, ob das Binding funktioniert -->
+  <tr>
+    <td>TEST</td>
+    <td>{{combination.c1}}</td>
+    <td>{{combination.c2}}</td>
+    <td>{{combination.c3}}</td>
+    <td>{{combination.c4}}</td>
+    <td>TEST</td>
+  </tr>
+  <!-- show info if game is over -->
   <tr *ngIf="board.guesses.length >= board.maxTries">
     <td colspan="6">Spiel vorbei</td>
   </tr>
 
 </table>
+

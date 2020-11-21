@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Board } from '../board';
+import { Board, Combination } from '../board';
 
 @Component({
   selector: 'board',
@@ -38,10 +38,17 @@ export class BoardComponent implements OnInit {
       ]
     };
 
+  combination : Combination = {
+    c1: "A",
+    c2: "B",
+    c3: "C",
+    c4: "F"
+  }
+
   constructor() { }
 
   ngOnInit(): void {
-
+    console.log("board view created")
   }
 
 }
