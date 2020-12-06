@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
     steps:
       - name: Setup repo
         uses: actions/checkout@v2
