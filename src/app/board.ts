@@ -4,6 +4,8 @@
 export interface Board {
 
   maxTries : number;
+  colors : number;
+  fields : number;
   guesses : Guess[];
   secretCombination : Combination;
 }
@@ -24,9 +26,6 @@ export interface Guess {
 }
 
 export interface Combination {
-  c1: number;
-  c2: number;
-  c3: number;
-  c4: number;
+  items : number[]
 }
 

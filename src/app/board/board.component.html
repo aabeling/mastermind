@@ -7,59 +7,22 @@
   <!-- iterate over all guesses -->
   <tr *ngFor="let guess of board.guesses; let try = index">
     <td>{{try+1}}</td>
-    <td>{{guess.combination.c1}}</td>
-    <td>{{guess.combination.c2}}</td>
-    <td>{{guess.combination.c3}}</td>
-    <td>{{guess.combination.c4}}</td>
+    <td *ngFor="let i of numberArray(1,board.fields)">{{guess.combination.items[i-1]}}</td>
     <td>{{guess.correct}}/{{guess.correctColors}}</td>
   </tr>
   <!-- input for new guess -->
   <tr *ngIf="board.guesses.length < board.maxTries">
     <td>&nbsp;</td>
-    <td><select [(ngModel)]="combination.c1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-      <option>6</option>
-    </select></td>
-    <td><select [(ngModel)]="combination.c2">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-      <option>6</option>
-    </select></td>
-    <td><select [(ngModel)]="combination.c3">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-      <option>6</option>
-    </select></td>
-    <td><select [(ngModel)]="combination.c4">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-      <option>6</option>
-    </select></td>
+    <td *ngFor="let i of numberArray(1,board.fields)">
+      <select [(ngModel)]="combination.items[i-1]">
+        <option *ngFor="let j of numberArray(1,board.colors)">{{j}}</option>
+      </select>
+    </td>
     <td>
       <button (click)="onGuess()">Versuchen</button>
     </td>
   </tr>
-  <tr><!-- just for debugging -->
-    <td>Secret</td>
-    <td>{{board.secretCombination.c1}}</td>
-    <td>{{board.secretCombination.c2}}</td>
-    <td>{{board.secretCombination.c3}}</td>
-    <td>{{board.secretCombination.c4}}</td>
-    <td>&nbsp;</td>
-  </tr>
+
   <!-- show info if game is over -->
   <tr *ngIf="board.guesses.length >= board.maxTries">
     <td colspan="6">Spiel vorbei</td>

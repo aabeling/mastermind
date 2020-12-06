@@ -14,20 +14,16 @@ export class BoardComponent implements OnInit {
    */
   board : Board = {
     maxTries : 7,
+    fields : 4,
+    colors : 6,
     guesses : [],
     secretCombination : {
-      c1: 0,
-      c2: 0,
-      c3: 0,
-      c4: 0
+      items : []
     }
   };
 
   combination : Combination = {
-    c1: 1,
-    c2: 1,
-    c3: 1,
-    c4: 1
+    items : []
   }
 
   constructor() { }
@@ -35,6 +31,9 @@ export class BoardComponent implements OnInit {
   ngOnInit(): void {
     console.log("board view created")
     this.board.secretCombination = this.createSecretCombination()
+    for (let i = 0; i < this.board.fields; i++) {
+      this.combination.items[i] = 1
+    }
   }
 
   onGuess(): void {
@@ -47,17 +46,17 @@ export class BoardComponent implements OnInit {
 
     /* create a copy of the combination */
     var guessCombination : Combination = {
-      c1: combination.c1,
-      c2: combination.c2,
-      c3: combination.c3,
-      c4: combination.c4
+      items : []
+    }
+    for (let i = 0; i < this.board.fields; i++) {
+      guessCombination.items[i] = combination.items[i];
     }
 
     var correct : number = 0
     var correctColors : number = 0
 
     // TODO evaluate correct and correctColors
-    
+
     var newGuess : Guess = {
       combination : guessCombination,
       correct: correct,
@@ -73,12 +72,11 @@ export class BoardComponent implements OnInit {
   createSecretCombination() : Combination {
 
     var result : Combination = {
-      c1: this.randomNumber(6),
-      c2: this.randomNumber(6),
-      c3: this.randomNumber(6),
-      c4: this.randomNumber(6)
+      items : []
     }
-
+    for (let i = 0; i < this.board.fields; i++) {
+      result.items.push(this.randomNumber(this.board.colors))
+    }
     return result
   }
 
@@ -88,5 +86,13 @@ export class BoardComponent implements OnInit {
   randomNumber(maxValue : number) : number {
 
     return Math.floor(Math.random() * maxValue) + 1
+  }
+
+  numberArray(minValue : number, maxValue : number) : number[] {
+    var result : number[] = [];
+    for (let i = minValue; i <= maxValue; i++) {
+      result.push(i);
+    }
+    return result;
   }
 }
