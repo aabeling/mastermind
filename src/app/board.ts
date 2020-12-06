@@ -24,9 +24,9 @@ export interface Guess {
 }
 
 export interface Combination {
-  c1: string;
-  c2: string;
-  c3: string;
-  c4: string;
+  c1: number;
+  c2: number;
+  c3: number;
+  c4: number;
 }
 
