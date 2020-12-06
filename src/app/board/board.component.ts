@@ -45,6 +45,7 @@ export class BoardComponent implements OnInit {
 
   evaluateGuess(combination : Combination) : Guess {
 
+    /* create a copy of the combination */
     var guessCombination : Combination = {
       c1: combination.c1,
       c2: combination.c2,
@@ -52,11 +53,17 @@ export class BoardComponent implements OnInit {
       c4: combination.c4
     }
 
+    var correct : number = 0
+    var correctColors : number = 0
+
+    // TODO evaluate correct and correctColors
+    
     var newGuess : Guess = {
       combination : guessCombination,
-      correct: 0,
-      correctColors: 0
+      correct: correct,
+      correctColors: correctColors
     }
+
     return newGuess
   }
 
@@ -75,6 +82,9 @@ export class BoardComponent implements OnInit {
     return result
   }
 
+  /**
+   * Creates a random number between 1 (inclusive) and maxValue (inclusive).
+   */
   randomNumber(maxValue : number) : number {
 
     return Math.floor(Math.random() * maxValue) + 1
