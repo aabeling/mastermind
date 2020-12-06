@@ -10,8 +10,14 @@
     <td *ngFor="let i of numberArray(1,board.fields)">{{guess.combination.items[i-1]}}</td>
     <td>{{guess.correct}}/{{guess.correctColors}}</td>
   </tr>
+  <!-- add empty lines for the remaining guesses -->
+  <tr *ngFor="let i of numberArray(board.guesses.length+1, board.maxTries)">
+    <td>&nbsp;</td>
+    <td *ngFor="let i of numberArray(1,board.fields)">&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
   <!-- input for new guess -->
-  <tr *ngIf="board.guesses.length < board.maxTries">
+  <tr *ngIf="!gameWon && !gameLost">
     <td>&nbsp;</td>
     <td *ngFor="let i of numberArray(1,board.fields)">
       <select [(ngModel)]="combination.items[i-1]">
@@ -22,10 +28,16 @@
       <button (click)="onGuess()">Versuchen</button>
     </td>
   </tr>
-
-  <!-- show info if game is over -->
-  <tr *ngIf="board.guesses.length >= board.maxTries">
-    <td colspan="6">Spiel vorbei</td>
+  <tr *ngIf="gameLost">
+    <td>Secret</td>
+    <td *ngFor="let i of numberArray(1,board.fields)">{{board.secretCombination.items[i-1]}}</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr *ngIf="gameLost">
+    <td colspan="6">Spiel verloren</td>
+  </tr>
+  <tr *ngIf="gameWon">
+    <td colspan="6">Spiel gewonnen</td>
   </tr>
 
 </table>

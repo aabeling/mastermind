@@ -26,6 +26,9 @@ export class BoardComponent implements OnInit {
     items : []
   }
 
+  gameWon : boolean = false
+  gameLost : boolean = false
+
   constructor() { }
 
   ngOnInit(): void {
@@ -39,7 +42,14 @@ export class BoardComponent implements OnInit {
   onGuess(): void {
     console.log("guessed", this.combination)
 
-    this.board.guesses.push(this.evaluateGuess(this.combination))
+    var newGuess : Guess = this.evaluateGuess(this.combination)
+    if (newGuess.correct == this.board.fields) {
+      this.gameWon = true
+    }
+    this.board.guesses.push(newGuess)
+    if (!this.gameWon && this.board.guesses.length == this.board.maxTries) {
+      this.gameLost = true
+    }
   }
 
   evaluateGuess(combination : Combination) : Guess {
@@ -54,8 +64,34 @@ export class BoardComponent implements OnInit {
 
     var correct : number = 0
     var correctColors : number = 0
+    var usedFields : boolean[] = new Array(this.board.fields);
+    for (let i = 0; i < this.board.fields; i++) {
+      usedFields[i] = false
+    }
+    console.log("usedFields start", usedFields)
 
-    // TODO evaluate correct and correctColors
+    /* count perfect items */
+    for (let i = 0; i < this.board.fields; i++) {
+      if (guessCombination.items[i] == this.board.secretCombination.items[i]) {
+        /* found a perfect item */
+        correct++;
+        usedFields[i] = true;
+      }
+    }
+    console.log("usedFields after perfect count", usedFields)
+
+    /* count matching colors on wrong position */
+    for (let i = 0; i < this.board.fields; i++) {
+      for (let j = 0; j < this.board.fields; j++) {
+        if (i != j
+          && usedFields[j] == false
+          && guessCombination.items[i] == this.board.secretCombination.items[j]) {
+          correctColors++;
+          usedFields[j] = true;
+        }
+      }
+    }
+    console.log("usedFields after colors count", usedFields)
 
     var newGuess : Guess = {
       combination : guessCombination,
@@ -88,6 +124,11 @@ export class BoardComponent implements OnInit {
     return Math.floor(Math.random() * maxValue) + 1
   }
 
+  /**
+   * Creates an array containing a sequence of numbers.
+   * This can be used in a template to realize a
+   * for i=number to number loop
+   */
   numberArray(minValue : number, maxValue : number) : number[] {
     var result : number[] = [];
     for (let i = minValue; i <= maxValue; i++) {
