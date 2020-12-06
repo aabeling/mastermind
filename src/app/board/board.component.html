@@ -52,15 +52,6 @@
       <button (click)="onGuess()">Versuchen</button>
     </td>
   </tr>
-  <!-- nur zum Testen, ob das Binding funktioniert -->
-  <tr>
-    <td>TEST</td>
-    <td>{{combination.c1}}</td>
-    <td>{{combination.c2}}</td>
-    <td>{{combination.c3}}</td>
-    <td>{{combination.c4}}</td>
-    <td>TEST</td>
-  </tr>
   <!-- show info if game is over -->
   <tr *ngIf="board.guesses.length >= board.maxTries">
     <td colspan="6">Spiel vorbei</td>

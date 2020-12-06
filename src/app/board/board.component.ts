@@ -14,28 +14,7 @@ export class BoardComponent implements OnInit {
    */
   board : Board = {
     maxTries : 7,
-    guesses : [
-      {
-          combination : {
-            c1: "A",
-            c2: "B",
-            c3: "C",
-            c4: "D"
-          },
-          correct: 2,
-          correctColors: 1
-        },
-        {
-          combination : {
-            c1: "F",
-            c2: "B",
-            c3: "B",
-            c4: "A"
-          },
-          correct: 1,
-          correctColors: 3
-        }
-      ]
+    guesses : []
     };
 
   combination : Combination = {
@@ -54,11 +33,23 @@ export class BoardComponent implements OnInit {
   onGuess(): void {
     console.log("guessed", this.combination)
 
+    this.board.guesses.push(this.evaluateGuess(this.combination))
+  }
+
+  evaluateGuess(combination : Combination) : Guess {
+
+    var guessCombination : Combination = {
+      c1: combination.c1,
+      c2: combination.c2,
+      c3: combination.c3,
+      c4: combination.c4
+    }
+
     var newGuess : Guess = {
-      combination : this.combination,
+      combination : guessCombination,
       correct: 0,
       correctColors: 0
     }
-    this.board.guesses.push(newGuess)
+    return newGuess
   }
 }
