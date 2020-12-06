@@ -16,11 +16,4 @@ jobs:
         uses: actions/setup-node@v1
       - run: npm install
       - run: npm install -g @angular/cli > /dev/null
-      - run: ng build --prod --output-path=dist --base-href="https://aabeling.github.io/mastermind/"
-      - name: Publish generated content to GitHub Pages
-        uses: tsunematsu21/actions-publish-gh-pages@v1.0.1
-        with:
-          dir: dist
-          branch: gh-pages
-          token: ${{ secrets.GITHUB_TOKEN }}
-
+      - run: ng deploy --base-href=/mastermind/
