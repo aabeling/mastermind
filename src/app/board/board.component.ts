@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Board, Combination } from '../board';
+import { Board, Guess, Combination } from '../board';
 
 @Component({
   selector: 'board',
@@ -51,4 +51,14 @@ export class BoardComponent implements OnInit {
     console.log("board view created")
   }
 
+  onGuess(): void {
+    console.log("guessed", this.combination)
+
+    var newGuess : Guess = {
+      combination : this.combination,
+      correct: 0,
+      correctColors: 0
+    }
+    this.board.guesses.push(newGuess)
+  }
 }
