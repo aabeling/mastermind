@@ -5,7 +5,7 @@ export interface Board {
 
   maxTries : number;
   guesses : Guess[];
-
+  secretCombination : Combination;
 }
 
 export interface Guess {

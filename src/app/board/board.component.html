@@ -52,6 +52,14 @@
       <button (click)="onGuess()">Versuchen</button>
     </td>
   </tr>
+  <tr><!-- just for debugging -->
+    <td>Secret</td>
+    <td>{{board.secretCombination.c1}}</td>
+    <td>{{board.secretCombination.c2}}</td>
+    <td>{{board.secretCombination.c3}}</td>
+    <td>{{board.secretCombination.c4}}</td>
+    <td>&nbsp;</td>
+  </tr>
   <!-- show info if game is over -->
   <tr *ngIf="board.guesses.length >= board.maxTries">
     <td colspan="6">Spiel vorbei</td>

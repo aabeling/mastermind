@@ -14,8 +14,14 @@ export class BoardComponent implements OnInit {
    */
   board : Board = {
     maxTries : 7,
-    guesses : []
-    };
+    guesses : [],
+    secretCombination : {
+      c1: 0,
+      c2: 0,
+      c3: 0,
+      c4: 0
+    }
+  };
 
   combination : Combination = {
     c1: 1,
@@ -24,18 +30,11 @@ export class BoardComponent implements OnInit {
     c4: 1
   }
 
-  secretCombination: Combination = {
-    c1: 0,
-    c2: 0,
-    c3: 0,
-    c4: 0
-  }
-
   constructor() { }
 
   ngOnInit(): void {
     console.log("board view created")
-    this.secretCombination = this.createSecretCombination()
+    this.board.secretCombination = this.createSecretCombination()
   }
 
   onGuess(): void {
