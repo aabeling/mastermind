@@ -14,6 +14,13 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup node
         uses: actions/setup-node@v1
-      - name: deploy
-        run: ng deploy --base-href=/mastermind/
-        
+      - run: npm install
+      - run: npm install -g @angular/cli > /dev/null
+      - run: ng build --prod --output-path=dist --base-href="https://techiediaries.github.io/angular-bootstrap-demo/"
+      - name: Publish generated content to GitHub Pages
+        uses: tsunematsu21/actions-publish-gh-pages@v1.0.1
+        with:
+          dir: mastermind
+          branch: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
+
